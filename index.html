@@ -36,6 +36,61 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             transition: all 0.3s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Particle Background - Stars */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .particle {
+            position: absolute;
+            color: var(--primary-color);
+            font-size: 12px;
+            opacity: 0.4;
+            animation: float linear infinite;
+            user-select: none;
+        }
+
+        .particle::before {
+            content: '⭐';
+        }
+
+        .particle.twinkle::before {
+            content: '✨';
+        }
+
+        .particle.star2::before {
+            content: '🌟';
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         .container {
@@ -288,8 +343,9 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 3rem;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -308,10 +364,13 @@
         .social-link.github { background: #333; }
         .social-link.linkedin { background: #0077b5; }
         .social-link.youtube { background: #ff0000; }
-        .social-link.email { background: #ea4335; }
+        .social-link.spotify { background: #1db954; }
+        .social-link.codeforces { background: #1f8dd6; }
+        .social-link.vnoi { background: #4CAF50; }
 
         .social-link:hover {
             transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         /* Footer */
@@ -346,6 +405,12 @@
             .social-links {
                 gap: 1rem;
             }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
         }
 
         /* Animations */
@@ -366,14 +431,17 @@
     </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+    
     <!-- Header -->
     <header>
         <nav class="container">
-            <div class="logo">Law</div>
+            <div class="logo"></div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
+
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button></li>
@@ -385,56 +453,36 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Hello</h1>
-                <p class="subtitle">Full Stack Developer | Problem Solver | Tech Enthusiast</p>
+                <h1>I'm Law</h1>
                 <a href="#projects" class="cta-button">View My Work</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Social Links Section -->
     <section id="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <img src="https://via.placeholder.com/300x300?text=Your+Photo" alt="Profile" class="profile-img">
-                <div class="about-text">
-                    <p>Hello! I'm a passionate developer with experience in creating innovative solutions. I love working with modern technologies and turning complex problems into simple, beautiful designs.</p>
-                    <p>When I'm not coding, you can find me exploring new technologies, contributing to open source projects, or sharing knowledge with the developer community.</p>
-                    <p>I'm always eager to take on new challenges and collaborate on exciting projects!</p>
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="contact-content">
+                <div class="social-links">
+                    <a href="https://github.com/Law-Coder2010" class="social-link github" target="_blank" title="GitHub Profile">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/law-lee-545b04315" class="social-link linkedin" target="_blank" title="LinkedIn Profile">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://youtube.com/@funnyscience3959?si=nauSSlopsWNLddrz" class="social-link youtube" rel="noopener noreferrer" title="YouTube Channel">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://open.spotify.com/playlist/1l2ySMoQ5PLlLPF8RMsWb6?si=Gv5sFhwWSIu5FduR9_SfAA" class="social-link spotify" target="_blank" title="Spotify Playlist">
+                        <i class="fab fa-spotify"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fab fa-js-square skill-icon"></i>
-                    <h3>JavaScript</h3>
-                    <p>Modern ES6+ JavaScript, async programming, and DOM manipulation</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-react skill-icon"></i>
-                    <h3>React</h3>
-                    <p>Component-based architecture, hooks, state management, and modern React patterns</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-database skill-icon"></i>
-                    <h3>Backend</h3>
-                    <p>Node.js, Express, databases, APIs, and server-side development</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-git-alt skill-icon"></i>
-                    <h3>Version Control</h3>
-                    <p>Git, GitHub, collaborative development, and CI/CD workflows</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
@@ -504,21 +552,6 @@
             <div class="contact-content">
                 <h2 class="section-title">Let's Connect</h2>
                 <p>I'm always interested in hearing about new opportunities and interesting projects. Feel free to reach out if you'd like to collaborate!</p>
-                
-                <div class="social-links">
-                    <a href="https://github.com/yourusername" class="social-link github" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/yourusername" class="social-link linkedin" target="_blank">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://youtube.com/@yourusername" class="social-link youtube" target="_blank">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="mailto:your.email@example.com" class="social-link email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -526,11 +559,41 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Your Name. Built with ❤️ and hosted on GitHub Pages.</p>
+            <p>&copy; 2025 Law. Built with ❤️ and creativity.</p>
         </div>
     </footer>
 
     <script>
+        // Create particle background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random horizontal position
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Random animation duration (slower = more elegant)
+                particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+                
+                // Random delay
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                
+                // Random size variation
+                const size = Math.random() * 3 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
         // Theme toggle functionality
         function toggleTheme() {
             const body = document.body;
@@ -547,7 +610,7 @@
             }
         }
 
-        // Load saved theme
+        // Load saved theme and create particles
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
             const themeToggle = document.querySelector('.theme-toggle i');
@@ -556,6 +619,9 @@
                 document.body.setAttribute('data-theme', 'dark');
                 themeToggle.className = 'fas fa-sun';
             }
+            
+            // Create particles after DOM is loaded
+            createParticles();
         });
 
         // Smooth scrolling for navigation links
